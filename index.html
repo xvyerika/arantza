@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis 15 Años - Arantza Anthonella</title>
+    <!-- Ultra Elegant Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #B58B5D;
+            --primary-light: #E6CBA5;
+            --bg-color: #FCFAF5;
+            --text-dark: #38302A;
+            --text-medium: #5C524A;
+            --text-muted: #8F847B;
+            --champagne-gradient: linear-gradient(135deg, #B58B5D, #DEB887, #996F42);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- BACKGROUND ANIMATION --- */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            background: #FDFBF7;
+            overflow: hidden;
+        }
+
+        .bg-animation::before, .bg-animation::after {
+            content: '';
+            position: absolute;
+            width: 70vw;
+            height: 70vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(181, 139, 93, 0.12) 0%, transparent 60%);
+            animation: move-orbs 25s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        .bg-animation::before {
+            top: -20vw;
+            left: -20vw;
+        }
+
+        .bg-animation::after {
+            bottom: -20vw;
+            right: -20vw;
+            background: radial-gradient(circle, rgba(230, 203, 165, 0.18) 0%, transparent 60%);
+            animation-delay: -12.5s;
+        }
+
+        @keyframes move-orbs {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30vw, 15vw) scale(1.3); }
+        }
+
+        /* Particles */
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.5;
+            pointer-events: none;
+            animation: float-up linear infinite;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* --- BUTTERFLIES --- */
+        .butterfly {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            opacity: 0.7;
+            z-index: -1;
+            animation: fly-butterfly 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 4px 6px rgba(181, 139, 93, 0.2));
+        }
+
+        @keyframes fly-butterfly {
+            0% { transform: translateY(110vh) translateX(-50px) rotate(-15deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.8; }
+            50% { transform: translateY(50vh) translateX(50px) rotate(15deg) scale(1.1); }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-20vh) translateX(-80px) rotate(-30deg) scale(1.3); opacity: 0; }
+        }
+
+        /* --- DOOR OVERLAY (DELICATE GLASS ENTRANCE) --- */
+        #door-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            transition: visibility 2.5s;
+            perspective: 1500px;
+            background: transparent;
+        }
+
+        /* Delicate Minimalist Glass Doors */
+        .door {
+            width: 50%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            position: relative;
+            transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .left-door {
+            transform-origin: left;
+            justify-content: flex-end;
+            border-right: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .right-door {
+            transform-origin: right;
+            justify-content: flex-start;
+            border-left: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        /* Minimalist glow lines */
+        .door::before {
+            content: '';
+            position: absolute;
+            top: 4%; bottom: 4%;
+            left: 6%; right: 6%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        /* Delicate Glass Button */
+        .open-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 25px rgba(181, 139, 93, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.6);
+            transition: all 0.5s ease;
+        }
+
+        .open-btn:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 30px rgba(181, 139, 93, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .open-btn .text-15 {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.2rem;
+            color: var(--primary-color);
+            line-height: 1;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+            margin-top: -5px;
+            font-weight: 400;
+        }
+
+        .open-btn .text-abrir {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 2px;
+            color: var(--text-muted);
+        }
+
+        /* Door Open State */
+        .doors-open .left-door { transform: rotateY(-105deg); }
+        .doors-open .right-door { transform: rotateY(105deg); }
+        .doors-open .open-btn { opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(0.8); transition: all 1s ease; }
+        .doors-open #door-overlay { visibility: hidden; transition-delay: 2.5s; background: transparent; }
+
+
+        /* --- DELICATE GLASSMORPHISM CARD --- */
+        .invitation-wrapper {
+            width: 100%;
+            padding: 40px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .invitation-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 650px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(181, 139, 93, 0.08), inset 0 0 15px rgba(255, 255, 255, 0.6);
+            position: relative;
+            transform: scale(0.95); 
+            transition: transform 2.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .show-invitation .invitation-card {
+            transform: scale(1);
+        }
+
+        /* Inner Border */
+        .invitation-card::before {
+            content: '';
+            position: absolute;
+            top: 15px; left: 15px; right: 15px; bottom: 15px;
+            border: 1px solid rgba(181, 139, 93, 0.15);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        /* Corner accents */
+        .corner {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border: 1px solid rgba(181, 139, 93, 0.4);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+        .corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+        .corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+        .corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+        /* --- TEXT ANIMATIONS --- */
+        
+        /* 1. Glide Up Animation (for top content behind doors) */
+        .top-content {
+            transition: transform 2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        body:not(.show-invitation) .top-content {
+            transform: translateY(20px);
+        }
+        
+        .show-invitation .glide-1 { transition-delay: 0.1s; }
+        .show-invitation .glide-2 { transition-delay: 0.3s; }
+        .show-invitation .glide-3 { transition-delay: 0.5s; }
+        .show-invitation .glide-4 { transition-delay: 0.7s; }
+        .show-invitation .glide-5 { transition-delay: 0.9s; }
+
+        /* 2. Scroll Animation (for bottom content) */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Text Elements */
+        .host {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            line-height: 1;
+            text-shadow: 0 2px 10px rgba(181, 139, 93, 0.15);
+        }
+
+        .message {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 35px;
+            padding: 0 10px;
+            font-weight: 300;
+        }
+
+        .invite-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        @keyframes shine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .name {
+            font-family: 'Alex Brush', cursive;
+            font-size: 6rem;
+            line-height: 1;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            background: var(--champagne-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 15px rgba(181, 139, 93, 0.15);
+            animation: shine 6s linear infinite;
+        }
+
+        .surname {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 8px;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 45px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 80px;
+            height: 1px;
+            background: var(--champagne-gradient);
+            margin: 0 auto 35px;
+            opacity: 0.4;
+        }
+
+        /* Event Details */
+        .event-section {
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .event-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .event-detail {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            margin-bottom: 6px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .event-highlight {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+        }
+
+        .event-time {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-top: 8px;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .warning-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: #d96f6f;
+            font-style: italic;
+            margin-top: 12px;
+            font-weight: 400;
+        }
+
+        /* Delicate Glass Countdown Timer */
+        .countdown {
+            margin: 35px 0;
+            padding: 25px 15px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 5px 20px rgba(181, 139, 93, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+        }
+
+        .time-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .time-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Delicate Glass Badges Grid */
+        .badges-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .badge-full {
+            grid-column: span 2;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 20px 15px;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(181, 139, 93, 0.03);
+        }
+
+        .badge:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 25px rgba(181, 139, 93, 0.08);
+        }
+
+        .badge strong {
+            display: block;
+            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* RSVP Button */
+        .btn-rsvp {
+            font-family: 'Montserrat', sans-serif;
+            display: inline-block;
+            background: var(--champagne-gradient);
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            margin-top: 10px;
+            box-shadow: 0 10px 30px rgba(181, 139, 93, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+
+        .btn-rsvp::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn-rsvp:hover::after {
+            left: 100%;
+        }
+
+        .btn-rsvp:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(181, 139, 93, 0.4);
+            color: #FFF;
+        }
+        
+        /* Closing Phrase */
+        .closing-phrase {
+            font-family: 'Alex Brush', cursive;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-top: 40px;
+            margin-bottom: -10px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(181, 139, 93, 0.15);
+        }
+
+        /* Music Button */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(181, 139, 93, 0.15);
+            transition: all 0.4s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .show-invitation .music-btn {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--primary-color);
+            color: #FFFFFF;
+            box-shadow: 0 8px 25px rgba(181, 139, 93, 0.3);
+        }
+        
+        .music-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .host { font-size: 3rem; }
+            .name { font-size: 4rem; }
+            .surname { font-size: 0.9rem; letter-spacing: 5px; }
+            .invitation-card { padding: 45px 25px; }
+            .badges-grid { grid-template-columns: 1fr; }
+            .badge-full { grid-column: span 1; }
+            .event-title { font-size: 1.7rem; }
+            .open-btn .text-15 { font-size: 3rem; }
+            .countdown-grid { gap: 10px; }
+            .time-box { min-width: 55px; }
+            .time-num { font-size: 1.8rem; }
+            .time-label { font-size: 0.65rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+
+    <!-- Particles Container -->
+    <div id="particles-container"></div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" src="Christina Perri - A Thousand Years [Official Music Video] [rtOvBOTyX00].mp3" loop></audio>
+
+    <!-- Interactive Doors (Overlay) -->
+    <div id="door-overlay">
+        <div class="door left-door"></div>
+        <div class="door right-door"></div>
+        
+        <div class="open-btn" onclick="openDoors()">
+            <span class="text-15">15</span>
+            <span class="text-abrir">Abrir</span>
+        </div>
+    </div>
+
+    <!-- Music Control -->
+    <div class="music-btn" id="music-btn" onclick="toggleMusic()">
+        <svg id="icon-play" viewBox="0 0 24 24" style="display: none;"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </div>
+
+    <!-- Main Invitation Card -->
+    <div class="invitation-wrapper">
+        <div class="invitation-card">
+            
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+
+            <div class="host top-content glide-1">Dayana Amaya</div>
+            <div class="message top-content glide-2">
+                "Hace quince años, Dios me bendijo con el regalo más hermoso: tu vida. 
+                Verte crecer ha sido mi mayor orgullo, y hoy, con el corazón lleno de gratitud y emoción, 
+                quiero invitarte a celebrar la maravillosa transición de mi amada hija hacia una nueva etapa llena de sueños."
+            </div>
+            
+            <div class="invite-text top-content glide-3">Te invito a celebrar los 15 años de</div>
+            
+            <h1 class="name top-content glide-4">Arantza Anthonella</h1>
+            <div class="surname top-content glide-5">Muñoz Amaya</div>
+
+            <div class="divider animate-on-scroll"></div>
+
+            <!-- Eucaristía -->
+            <div class="event-section animate-on-scroll">
+                <div class="event-title">Solemne Eucaristía</div>
+                <div class="event-detail event-highlight">Basílica Menor</div>
+                <div class="event-detail">San Antonio del Táchira</div>
+                <div class="event-detail">Jueves, 16 de Julio de 2026</div>
+                <div class="event-time">Hora: 6:00 PM</div>
+            </div>
+
+            <!-- Recepción -->
+            <div class="event-section animate-on-scroll">
+                <div class="event-title">Recepción</div>
+                <div class="event-detail event-highlight">Club Palma Real</div>
+                <div class="event-detail">Sábado, 18 de Julio de 2026</div>
+                <div class="event-time">Hora: 7:00 PM</div>
+                <div class="warning-text">OJO: La quinceañera saldrá a las 7:30 PM</div>
+            </div>
+
+            <div class="divider animate-on-scroll"></div>
+
+            <!-- Countdown Timer -->
+            <div class="countdown animate-on-scroll" id="countdown">
+                <div class="countdown-title">Faltan</div>
+                <div class="countdown-grid">
+                    <div class="time-box">
+                        <span class="time-num" id="days">00</span>
+                        <span class="time-label">Días</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-num" id="hours">00</span>
+                        <span class="time-label">Horas</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-num" id="minutes">00</span>
+                        <span class="time-label">Min</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-num" id="seconds">00</span>
+                        <span class="time-label">Seg</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detalles -->
+            <div class="badges-grid">
+                <div class="badge animate-on-scroll">
+                    <strong>Dress Code</strong>
+                    Playera color blanco
+                </div>
+                <div class="badge animate-on-scroll">
+                    <strong>Niños</strong>
+                    Dulces sueños
+                </div>
+                <div class="badge badge-full animate-on-scroll">
+                    <strong>Lluvia de Sobres</strong>
+                    Una tradición de buenos deseos en efectivo
+                </div>
+            </div>
+
+            <!-- RSVP -->
+            <a href="https://wa.me/584000000000?text=Hola%20Dayana,%20confirmo%20mi%20asistencia%20a%20los%2015%20a%C3%B1os%20de%20Arantza.%20Muchas%20gracias%20por%20la%20invitaci%C3%B3n." 
+               class="btn-rsvp animate-on-scroll" 
+               target="_blank">
+                Confirmar Asistencia
+            </a>
+
+            <div class="closing-phrase animate-on-scroll">"Espero contar con tu compañía en esta noche mágica"</div>
+
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('bg-music');
+        const iconPlay = document.getElementById('icon-play');
+        const iconPause = document.getElementById('icon-pause');
+
+        iconPlay.style.display = 'block';
+        iconPause.style.display = 'none';
+
+        function openDoors() {
+            document.body.classList.add('doors-open');
+            document.body.classList.add('show-invitation');
+            
+            music.play().then(() => {
+                iconPlay.style.display = 'none';
+                iconPause.style.display = 'block';
+            }).catch(error => {
+                console.log("Audio autoplay blocked:", error);
+                iconPlay.style.display = 'block';
+                iconPause.style.display = 'none';
+            });
+            
+            setTimeout(() => {
+                const overlay = document.getElementById('door-overlay');
+                if (overlay) overlay.style.display = 'none';
+            }, 2500);
+        }
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                iconPlay.style.display = 'none';
+                iconPause.style.display = 'block';
+            } else {
+                music.pause();
+                iconPlay.style.display = 'block';
+                iconPause.style.display = 'none';
+            }
+        }
+
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 35;
+
+            for(let i = 0; i < particleCount; i++) {
+                let particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                let size = Math.random() * 6 + 2; 
+                let left = Math.random() * 100; 
+                let duration = Math.random() * 15 + 10; 
+                let delay = Math.random() * 15; 
+
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = left + 'vw';
+                particle.style.animationDuration = duration + 's';
+                particle.style.animationDelay = delay + 's';
+
+                container.appendChild(particle);
+            }
+        }
+
+        function createButterflies() {
+            const container = document.body;
+            const butterflyCount = 5;
+            
+            const butterflySVG = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 14.5C10 11 5 8 2 12C0 14.5 4 18 9 15.5C10.5 14.5 11.5 13.5 12 12.5C12.5 13.5 13.5 14.5 15 15.5C20 18 24 14.5 22 12C19 8 14 11 12 14.5Z" fill="var(--primary-color)" fill-opacity="0.6"/>
+                <path d="M12 14.5C10 18 6 21 3 18C1.5 16.5 3 13 6 13.5C8 13.5 10.5 14 12 14.5Z" fill="var(--primary-light)" fill-opacity="0.4"/>
+                <path d="M12 14.5C14 18 18 21 21 18C22.5 16.5 21 13 18 13.5C16 13.5 13.5 14 12 14.5Z" fill="var(--primary-light)" fill-opacity="0.4"/>
+                <path d="M11.5 6C11 4 9.5 2 7.5 2" stroke="var(--primary-color)" stroke-width="0.8" stroke-linecap="round"/>
+                <path d="M12.5 6C13 4 14.5 2 16.5 2" stroke="var(--primary-color)" stroke-width="0.8" stroke-linecap="round"/>
+                <ellipse cx="12" cy="10" rx="1.5" ry="5" fill="var(--primary-color)"/>
+            </svg>`;
+            
+            for(let i = 0; i < butterflyCount; i++) {
+                let butterfly = document.createElement('div');
+                butterfly.classList.add('butterfly');
+                butterfly.innerHTML = butterflySVG;
+                
+                let left = Math.random() * 80 + 10;
+                let duration = Math.random() * 12 + 15;
+                let delay = Math.random() * 15;
+                let size = Math.random() * 1.5 + 2.5;
+
+                butterfly.style.left = left + 'vw';
+                butterfly.style.animationDuration = duration + 's';
+                butterfly.style.animationDelay = delay + 's';
+                butterfly.style.width = size + 'rem';
+                butterfly.style.height = size + 'rem';
+                butterfly.style.display = 'flex';
+                butterfly.style.justifyContent = 'center';
+                butterfly.style.alignItems = 'center';
+
+                container.appendChild(butterfly);
+            }
+        }
+
+        function initCountdown() {
+            const countDownDate = new Date("Jul 18, 2026 19:00:00").getTime();
+
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").innerHTML = "<div class='countdown-title' style='margin-bottom:0;'>¡Llegó el gran día!</div>";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+            }, 1000);
+        }
+
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+                observer.observe(el);
+            });
+        }
+
+        window.onload = () => {
+            createParticles();
+            createButterflies();
+            initCountdown();
+            initScrollAnimations();
+        };
+    </script>
+</body>
+</html>
